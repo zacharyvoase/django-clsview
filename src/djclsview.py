@@ -112,6 +112,9 @@ class View(object):
         ...
         AssertionError: Unauthenticated!
     
+    Using `cls._decorate()` is necessary here; just wrapping the class would
+    return the wrapper *function* (as returned by the decorator). `_decorate()`
+    wraps `__new__()` and returns a *class*.
     """
     
     def __new__(cls, request, *args, **kwargs):

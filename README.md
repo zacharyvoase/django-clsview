@@ -116,6 +116,9 @@ Decorating a view with a view decorator:
     ...
     AssertionError: Unauthenticated!
 
+Using `cls._decorate()` is necessary here; just wrapping the class would return
+the wrapper *function* (as returned by the decorator). `_decorate()` wraps
+`__new__()` and returns a *class*.
 
 ## (Un)license
 
