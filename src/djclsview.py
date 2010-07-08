@@ -267,7 +267,7 @@ def method_decorator(decorator):
     def decoratorwrapper(method):
         @wraps(method)
         def methodwrapper(self, *args, **kwargs):
-            return decorator(partial(method, self))(*args, **kwargs)
+            return decorator(wraps(method)(partial(method, self)))(*args, **kwargs)
         return methodwrapper
     return decoratorwrapper
 
