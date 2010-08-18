@@ -193,11 +193,13 @@ class View(object):
         
         """
         
+        new_method = cls.__new__
         for decorator in decorators[::-1]:
-            cls = type(cls.__name__, (cls,), {
-                '__new__': staticmethod(method_decorator(decorator)(cls.__new__)),
-            })
-        return cls
+            new_method = method_decorator(decorator)(new_method)
+        
+        return type(cls.__name__, (cls,), {
+            '__new__': staticmethod(new_method),
+        })
     
     # You might need to override this method.
     def __init__(self, request, *args, **kwargs):
