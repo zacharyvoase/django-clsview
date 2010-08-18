@@ -175,6 +175,22 @@ class View(object):
             invoking
             request: Request
         
+        As mentioned, you can pass in more than one decorator at a time, and
+        they will be *applied* in reverse order, hence *running* in the order
+        you provide:
+        
+            >>> def decorator2(func):
+            ...     def wrapper(*args, **kwargs):
+            ...         print 'wrapping 2'
+            ...         return func(*args, **kwargs)
+            ...     return wrapper
+            
+            >>> _ = X._decorate(decorator, decorator2)('Request')
+            wrapping
+            wrapping 2
+            invoking
+            request: Request
+        
         """
         
         for decorator in decorators[::-1]:
