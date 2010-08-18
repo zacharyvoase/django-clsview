@@ -205,12 +205,12 @@ def method_decorator(decorator):
     typical class-based view, the first argument will be `self`, so you won't be
     able to use the standard decorators. Until now!
     
-    `methodist()` wraps a function decorator to produce a new method decorator.
-    Use it like this:
+    `method_decorator()` wraps a function decorator to produce a new method
+    decorator. Use it like this:
     
         class MyClassBasedView(object):
             
-            @methodist(login_required)
+            @method_decorator(login_required)
             def __call__(self, request, *args, **kwargs):
                 do_something()
     
